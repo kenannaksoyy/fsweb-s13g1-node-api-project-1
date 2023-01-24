@@ -10,7 +10,7 @@ function getId() {
 
 const initializeUsers = () => ([
   { id: getId(), name: 'Ed Carter', bio: 'hero' },
-  { id: getId(), name: 'Mary Edwards', bio: 'super hero' }
+  { id: getId(), name: 'Mary Edwards', bio: 'super hero' },
 ])
 
 // FAKE IN-MEMORY USERS "TABLE"
@@ -34,7 +34,7 @@ const insert = ({ name, bio }) => {
   // INSERT INTO users (name, bio) VALUES ('foo', 'bar');
   const newUser = { id: getId(), name, bio }
   users.push(newUser)
-  return Promise.resolve(users)
+  return Promise.resolve(newUser)
 }
 
 const update = (id, changes) => {
@@ -44,7 +44,7 @@ const update = (id, changes) => {
 
   const updatedUser = { ...changes, id }
   users = users.map(d => (d.id === id) ? updatedUser : d)
-  return Promise.resolve(users)
+  return Promise.resolve(updatedUser)
 }
 
 const remove = id => {
@@ -53,7 +53,7 @@ const remove = id => {
   if (!user) return Promise.resolve(null)
 
   users = users.filter(d => d.id !== id)
-  return Promise.resolve(users)
+  return Promise.resolve(user)
 }
 
 const resetDB = () => { // ONLY TESTS USE THIS ONE
